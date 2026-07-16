@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "ratcheese",
+	"version": "${version}",
+	"name": "Rat Cheese Helper",
+	"description": "Highlights and enlarges the cheese spawned by the Rat pet on Hypixel Skyblock, and shows a HUD with active Rat's Blessing buffs (Magic Find) and loot shares.",
+	"authors": [
+		"Racapio"
+	],
+	"contact": {
+		"sources": "https://github.com/Racapio/RatCheese"
+	},
+	"license": "MIT",
+	"icon": "assets/ratcheese/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.ratcheese.RatCheeseMod"
+		],
+		"modmenu": [
+			"com.ratcheese.compat.ModMenuEntry"
+		]
+	},
+	"mixins": [
+		"ratcheese.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
