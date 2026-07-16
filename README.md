@@ -1,56 +1,58 @@
 # Rat Cheese Helper 🧀🐀
 
-Клиентский Fabric-мод для Hypixel Skyblock (Minecraft **26.1.2**) под механику пета **Rat** (Крыса).
+**English** · [Русский](README.ru.md)
+
+A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2**) built around the **Rat pet** mechanic.
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
-## Что делает
+## Features
 
-1. **Подсветка сыра.** Сыр, который спавнит крыса, живёт всего ~10 секунд. Мод подсвечивает его свечением сквозь стены (цвет настраивается) и **увеличивает до 5x**, чтобы успеть добежать.
-2. **HUD баффов:**
-   - кого ты баффнул: `Ты → Zellion63: +7✯ MF, 43с` (ник в цвете ранга игрока, отсчёт можно заменить тающей полоской);
-   - баффы чужих крыс на тебе;
-   - счётчик крысиного лута (RAT BLESSING) и уведомление о свежем луте;
-   - строка «Рядом пахнет СЫРОМ!», пока сыр не подобран или не исчез.
-3. **Алерты** — титул на весь экран + звук при появлении сыра (отключаются).
-4. **24 достижения** — от «Первого нюха» до «Крысиного короля», 7 секретных (часть с намёками-загадками), даты получения, пожизненная статистика.
+1. **Cheese highlight.** The cheese your rat spawns only lives for ~10 seconds. The mod makes it glow through walls (configurable color) and renders it **up to 5× bigger** so you can reach it in time.
+2. **Buff HUD:**
+   - who you buffed: `You → Zellion63: +7✯ MF, 43s` — the name is colored by the player's rank, the countdown can be swapped for a shrinking timer bar;
+   - buffs other rats put on you;
+   - rat loot counter (RAT BLESSING) plus a flash line for every fresh drop;
+   - a "You smell CHEESE nearby!" line until the cheese is collected or despawns.
+3. **Alerts** — full-screen title + sound when cheese appears (both optional).
+4. **24 achievements** — from "First Sniff" to "Rat King", 7 of them secret (some with cryptic hints), unlock dates and lifetime stats.
 
-## Установка
+## Installation
 
-1. [Fabric Loader](https://fabricmc.net/use/installer/) для Minecraft 26.1.2 (loader ≥ 0.19.3).
-2. В `mods`:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) для 26.1.2;
-   - `ratcheese-<версия>.jar` (см. [Releases](https://github.com/Racapio/RatCheese/releases) или собери сам);
-   - опционально [Mod Menu](https://modrinth.com/mod/modmenu) — настройки прямо из списка модов.
+1. [Fabric Loader](https://fabricmc.net/use/installer/) for Minecraft 26.1.2 (loader ≥ 0.19.3).
+2. Into `mods`:
+   - [Fabric API](https://modrinth.com/mod/fabric-api) for 26.1.2;
+   - `ratcheese-<version>.jar` (see [Releases](https://github.com/Racapio/RatCheese/releases) or build it yourself);
+   - optionally [Mod Menu](https://modrinth.com/mod/modmenu) — settings right from the mod list.
 
-## Команды
+## Commands
 
-| Команда | Что делает |
+| Command | Description |
 |---|---|
-| `/ratcheese` | Настройки (подсветка, цвет, размер сыра, HUD, алерты) |
-| `/ratcheese hud` | Редактор HUD: перетаскивание, колёсико — масштаб, стрелки — сдвиг, ПКМ — сброс |
-| `/ratcheese achievements` | Список достижений с прогрессом |
-| `/ratcheese test` | Тестовые данные в HUD для предпросмотра |
-| `/ratcheese reset` | Сброс сессионных баффов и счётчика лута |
-| `/ratcheese scan` | Отладка: проп-энтити в радиусе 8 блоков |
-| `/ratcheese addname <текст>` / `addtexture <hash>` | Дополнительные маркеры детекта сыра |
+| `/ratcheese` | Settings (highlight, glow color, cheese size, HUD, alerts) |
+| `/ratcheese hud` | HUD editor: drag with mouse, scroll to scale, arrow keys to nudge, right click to reset |
+| `/ratcheese achievements` | Achievement list with progress |
+| `/ratcheese test` | Inject sample data to preview the HUD |
+| `/ratcheese reset` | Reset session buffs and the loot counter |
+| `/ratcheese scan` | Debug: list prop entities within 8 blocks |
+| `/ratcheese addname <text>` / `addtexture <hash>` | Extra cheese-detection markers |
 
-Конфиг: `.minecraft/config/ratcheese.json`, статистика ачивок: `ratcheese_achievements.json`.
+Config: `.minecraft/config/ratcheese.json`, achievement data: `ratcheese_achievements.json`.
 
-## Детект сыра
+## Cheese detection
 
-Текстура сырной головы Hypixel вшита в мод — подсветка работает из коробки. Если Hypixel что-то поменяет: встань рядом с сыром, выполни `/ratcheese scan` и кликни зелёный **[+]** у нужной головы — текстура добавится в конфиг.
+The texture hash of Hypixel's cheese head is built into the mod — the highlight works out of the box. If Hypixel ever changes it: stand next to a cheese, run `/ratcheese scan` and click the green **[+]** next to the right head — the texture is added to your config.
 
-## Сборка из исходников
+## Building from source
 
-Нужен JDK 25:
+Requires JDK 25:
 
 ```
 gradlew build
 ```
 
-Jar появится в `build/libs/`.
+The jar ends up in `build/libs/`.
 
-## Дисклеймер
+## Disclaimer
 
-Мод клиентский, ничего не автоматизирует и читает только твой собственный чат. Как и любой мод на Hypixel — use at your own risk. Не аффилирован с Hypixel.
+Client-side only: the mod automates nothing and reads only your own chat. As with any Hypixel mod — use at your own risk. Not affiliated with Hypixel.
