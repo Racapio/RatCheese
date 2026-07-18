@@ -27,8 +27,14 @@ public class RatCheeseConfig {
 	public double cheeseScale = 3.0;
 	/** Radius around the player scanned for cheese entities, blocks. */
 	public double scanRadius = 48.0;
-	/** Case-insensitive markers matched against entity/item names and item model ids. */
-	public List<String> nameMarkers = new ArrayList<>(List.of("cheese"));
+	/**
+	 * Case-insensitive markers matched against entity/item names and item model ids.
+	 * Empty by default: matching by name ("cheese") lights up unrelated props like
+	 * Garden vermin traps ("Bait: Tasty Cheese") and Blue Cheese Goblin Omelettes.
+	 * The head-texture check below is the precise detector; names are an opt-in
+	 * fallback via /ratcheese addname.
+	 */
+	public List<String> nameMarkers = new ArrayList<>();
 	/** The known texture hash of the cheese head Hypixel spawns (found in-game via /ratcheese scan). */
 	public static final String CHEESE_HEAD_TEXTURE = "3d9c8dd245a6845d8704145bab5fac60a30765e1291e70e98e25d9fec41b26c5";
 	/** Player-head texture hashes (or base64 fragments) that mark a cheese entity. Extendable via /ratcheese scan. */
@@ -81,7 +87,10 @@ public class RatCheeseConfig {
 		cheeseScale = Math.clamp(cheeseScale, 1.0, 5.0);
 		hudScale = Math.clamp(hudScale, 0.5, 3.0);
 		scanRadius = Math.clamp(scanRadius, 8.0, 128.0);
-		if (nameMarkers == null) nameMarkers = new ArrayList<>(List.of("cheese"));
+		if (nameMarkers == null) nameMarkers = new ArrayList<>();
+		// Migration: "cheese" was the old default marker and causes false positives
+		// (vermin traps, omelettes). Clear it unless the user added custom markers.
+		if (nameMarkers.size() == 1 && nameMarkers.getFirst().equalsIgnoreCase("cheese")) nameMarkers.clear();
 		// Ship the known cheese texture by default; only add it to empty lists so
 		// deliberately customized configs are left alone.
 		if (headTextures == null || headTextures.isEmpty()) headTextures = new ArrayList<>(List.of(CHEESE_HEAD_TEXTURE));
