@@ -8,7 +8,7 @@ A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2**) built aroun
 
 ## Features
 
-1. **Cheese highlight.** The cheese your rat spawns only lives for ~10 seconds. The mod makes it glow through walls (configurable color) and renders it **up to 5× bigger** so you can reach it in time.
+1. **Cheese highlight.** The cheese your rat spawns only lives for ~10 seconds. While it's in your line of sight, the mod gives it a glowing outline (configurable color) and renders it **up to 5× bigger** so you can reach it in time. Nothing is revealed through opaque blocks.
 2. **Buff HUD:**
    - who you buffed: `You → Zellion63: +7✯ MF, 43s` — the name is colored by the player's rank, the countdown can be swapped for a shrinking timer bar;
    - buffs other rats put on you;

@@ -15,7 +15,11 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Base64;
 import java.util.Locale;
@@ -52,10 +56,28 @@ public class CheeseDetector {
 
 		AABB box = client.player.getBoundingBox().inflate(config.scanRadius);
 		for (Entity entity : client.level.getEntities(client.player, box)) {
-			if (isCheeseEntity(entity, config)) {
+			// Line-of-sight gate: highlighting entities hidden behind opaque blocks
+			// counts as X-ray (Modrinth content rule 3.3a), so hidden cheese is
+			// neither glowed nor enlarged.
+			if (isCheeseEntity(entity, config) && isVisible(client, entity)) {
 				CHEESE_IDS.add(entity.getId());
 			}
 		}
+	}
+
+	/** True if the camera has an unobstructed view of the entity (glass etc. does not block). */
+	private static boolean isVisible(Minecraft client, Entity entity) {
+		if (client.player == null || client.level == null) return false;
+		Vec3 from = client.gameRenderer.getMainCamera().position();
+		AABB box = entity.getBoundingBox();
+		Vec3 center = box.getCenter();
+		Vec3[] targets = {center, new Vec3(center.x, box.maxY, center.z)};
+		for (Vec3 to : targets) {
+			BlockHitResult hit = client.level.clip(new ClipContext(from, to,
+					ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, client.player));
+			if (hit.getType() == HitResult.Type.MISS) return true;
+		}
+		return false;
 	}
 
 	private static boolean isCheeseEntity(Entity entity, RatCheeseConfig config) {

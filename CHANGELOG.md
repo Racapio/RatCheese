@@ -4,6 +4,14 @@ All notable changes to **Rat Cheese Helper** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-07-24
+
+### Changed
+- The cheese highlight (glow + enlargement) now applies only while the cheese
+  is in the camera's line of sight — nothing is rendered through blocks
+  anymore. Required for compliance with Modrinth content rule 3.3a; also keeps
+  the mod cleanly within Hypixel's modification guidelines.
+
 ## [1.0.1] - 2026-07-18
 
 ### Fixed
