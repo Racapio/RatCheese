@@ -1,0 +1,18 @@
+# Centralized mod properties, shared by every version unless a per-version
+# table below overrides a key. See https://stonecutter.kikugie.dev/wiki/config/properties
+mod.id = "ratcheese"
+mod.name = "Rat Cheese Helper"
+mod.group = "com.ratcheese"
+mod.version = "1.0.2"
+
+deps.fabric_loader = "0.19.3"
+
+["26.1.2"]
+mod.mc_compat = "~26.1"
+deps.fabric_api = "0.154.2+26.1.2"
+deps.mod_menu = "18.0.0"
+
+["26.2"]
+mod.mc_compat = "~26.2"
+deps.fabric_api = "0.157.0+26.2"
+deps.mod_menu = "20.0.1"

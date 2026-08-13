@@ -68,7 +68,10 @@ public class CheeseDetector {
 	/** True if the camera has an unobstructed view of the entity (glass etc. does not block). */
 	private static boolean isVisible(Minecraft client, Entity entity) {
 		if (client.player == null || client.level == null) return false;
+		//? if <26.2
 		Vec3 from = client.gameRenderer.getMainCamera().position();
+		//? if >=26.2
+		//Vec3 from = client.gameRenderer.mainCamera().position();
 		AABB box = entity.getBoundingBox();
 		Vec3 center = box.getCenter();
 		Vec3[] targets = {center, new Vec3(center.x, box.maxY, center.z)};

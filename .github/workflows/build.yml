@@ -14,13 +14,15 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - name: Build
+      - name: Build all versions
         run: |
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew :26.1.2:build :26.2:build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ratcheese
-          path: build/libs/*.jar
+          path: |
+            versions/26.1.2/build/libs/*.jar
+            versions/26.2/build/libs/*.jar

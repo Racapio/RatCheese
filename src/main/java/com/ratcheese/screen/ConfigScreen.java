@@ -84,10 +84,17 @@ public class ConfigScreen extends Screen {
 		y += 24;
 
 		// Row 7: edit hud position | achievements
+		//? if <26.2 {
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.editHud"),
 				button -> minecraft.setScreen(new HudPositionScreen(this))).bounds(leftX, y, columnWidth, 20).build());
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.achievements"),
 				button -> minecraft.setScreen(new AchievementsScreen(this))).bounds(rightX, y, columnWidth, 20).build());
+		//?} else {
+		/*addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.editHud"),
+				button -> minecraft.gui.setScreen(new HudPositionScreen(this))).bounds(leftX, y, columnWidth, 20).build());
+		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.achievements"),
+				button -> minecraft.gui.setScreen(new AchievementsScreen(this))).bounds(rightX, y, columnWidth, 20).build());
+		*///?}
 		y += 28;
 
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.done"),
@@ -169,6 +176,9 @@ public class ConfigScreen extends Screen {
 	@Override
 	public void onClose() {
 		RatCheeseConfig.save();
+		//? if <26.2
 		minecraft.setScreen(parent);
+		//? if >=26.2
+		//minecraft.gui.setScreen(parent);
 	}
 }

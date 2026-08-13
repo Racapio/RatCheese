@@ -151,6 +151,9 @@ public class HudPositionScreen extends Screen {
 	@Override
 	public void onClose() {
 		RatCheeseConfig.save();
+		//? if <26.2
 		minecraft.setScreen(parent);
+		//? if >=26.2
+		//minecraft.gui.setScreen(parent);
 	}
 }

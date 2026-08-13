@@ -41,3 +41,6 @@ replay_*.log
 
 # temp run logs
 run_*.txt
+
+# stonecutter (multi-version)
+/versions/

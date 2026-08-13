@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.CommonColors;
 import org.jspecify.annotations.Nullable;
 
@@ -89,7 +90,12 @@ public class AchievementsScreen extends Screen {
 		boolean unlocked = AchievementManager.isUnlocked(achievement);
 		boolean hidden = achievement.secret && !unlocked;
 
+		//? if <26.2
 		Integer rarityRgb = achievement.rarity.color.getColor();
+		//? if >=26.2
+		//TextColor rarityTextColor = TextColor.fromLegacyFormat(achievement.rarity.color);
+		//? if >=26.2
+		//Integer rarityRgb = rarityTextColor == null ? null : rarityTextColor.getValue();
 		int rarityColor = 0xFF000000 | (rarityRgb == null ? 0xFFFFFF : rarityRgb);
 
 		// Card background + border (rarity-colored when unlocked)
@@ -161,6 +167,9 @@ public class AchievementsScreen extends Screen {
 
 	@Override
 	public void onClose() {
+		//? if <26.2
 		minecraft.setScreen(parent);
+		//? if >=26.2
+		//minecraft.gui.setScreen(parent);
 	}
 }

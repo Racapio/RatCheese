@@ -200,9 +200,15 @@ public class AchievementManager {
 		Minecraft client = Minecraft.getInstance();
 		if (client.player == null) return;
 
+		//? if <26.2 {
 		client.gui.resetTitleTimes();
 		client.gui.setSubtitle(Component.translatable("ratcheese.achievement.unlocked").withStyle(ChatFormatting.GREEN));
 		client.gui.setTitle(achievement.title());
+		//?} else {
+		/*client.gui.hud.resetTitleTimes();
+		client.gui.hud.setSubtitle(Component.translatable("ratcheese.achievement.unlocked").withStyle(ChatFormatting.GREEN));
+		client.gui.hud.setTitle(achievement.title());
+		*///?}
 
 		boolean big = achievement.rarity == Achievement.Rarity.LEGENDARY;
 		client.getSoundManager().play(SimpleSoundInstance.forUI(

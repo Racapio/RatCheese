@@ -1,8 +1,8 @@
 # Rat Cheese Helper 🧀🐀
 
-[English](README.md) · **Русский**
+[English](README.md) · **Русский** · [Français](README.fr.md)
 
-Клиентский Fabric-мод для Hypixel Skyblock (Minecraft **26.1.2**) под механику пета **Rat** (Крыса).
+Клиентский Fabric-мод для Hypixel Skyblock (Minecraft **26.1.2** и **26.2**) под механику пета **Rat** (Крыса).
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
@@ -19,10 +19,10 @@
 
 ## Установка
 
-1. [Fabric Loader](https://fabricmc.net/use/installer/) для Minecraft 26.1.2 (loader ≥ 0.19.3).
+1. [Fabric Loader](https://fabricmc.net/use/installer/) для Minecraft 26.1.2 или 26.2 (loader ≥ 0.19.3).
 2. В `mods`:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) для 26.1.2;
-   - `ratcheese-<версия>.jar` (см. [Releases](https://github.com/Racapio/RatCheese/releases) или собери сам);
+   - [Fabric API](https://modrinth.com/mod/fabric-api) под твою версию Minecraft;
+   - `ratcheese-<версия>+<версия mc>.jar` (см. [Releases](https://github.com/Racapio/RatCheese/releases) или собери сам);
    - опционально [Mod Menu](https://modrinth.com/mod/modmenu) — настройки прямо из списка модов.
 
 ## Команды
@@ -45,13 +45,19 @@
 
 ## Сборка из исходников
 
-Нужен JDK 25:
+Нужен JDK 25. Проект мультиверсионный (Stonecutter), таргетит Minecraft 26.1.2 и 26.2:
 
 ```
-gradlew build
+gradlew :26.1.2:build :26.2:build
 ```
 
-Jar появится в `build/libs/`.
+Или одну версию:
+
+```
+gradlew :26.1.2:build
+```
+
+Jar'ы появятся в `versions/<версия mc>/build/libs/`, либо в `build/libs/<версия мода>/` после `gradlew :26.1.2:buildAndCollect :26.2:buildAndCollect`.
 
 ## Дисклеймер
 

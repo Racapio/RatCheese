@@ -37,7 +37,10 @@ public class RatCheeseMod implements ClientModInitializer {
 			if (pendingScreen != null) {
 				Screen screen = pendingScreen;
 				pendingScreen = null;
+				//? if <26.2
 				client.setScreen(screen);
+				//? if >=26.2
+				//client.gui.setScreen(screen);
 			}
 		});
 	}

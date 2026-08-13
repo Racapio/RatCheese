@@ -173,7 +173,10 @@ public class BuffTracker {
 		RatCheeseConfig config = RatCheeseConfig.get();
 		Minecraft client = Minecraft.getInstance();
 		if (config.smellAlertTitle) {
+			//? if <26.2
 			client.gui.setTitle(Component.translatable("ratcheese.smell.title").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
+			//? if >=26.2
+			//client.gui.hud.setTitle(Component.translatable("ratcheese.smell.title").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
 		}
 		if (config.smellAlertSound) {
 			client.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING.value(), 1.5f, 1.0f));

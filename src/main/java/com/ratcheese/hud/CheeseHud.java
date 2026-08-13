@@ -45,9 +45,15 @@ public class CheeseHud {
 	private static void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
 		Minecraft client = Minecraft.getInstance();
 		RatCheeseConfig config = RatCheeseConfig.get();
+		//? if <26.2
 		if (!config.hudEnabled || client.player == null || client.options.hideGui) return;
+		//? if >=26.2
+		//if (!config.hudEnabled || client.player == null || client.gui.hud.isHidden()) return;
 		// The position screen draws its own preview.
+		//? if <26.2
 		if (client.screen instanceof HudPositionScreen) return;
+		//? if >=26.2
+		//if (client.gui.screen() instanceof HudPositionScreen) return;
 
 		List<Row> rows = buildRows(false);
 		if (rows.isEmpty()) return;
