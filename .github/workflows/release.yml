@@ -1,0 +1,78 @@
+name: Release
+
+# Push a tag like v1.1.1 to build every Minecraft target and publish a GitHub
+# release with all jars attached. The release notes are the matching section
+# of CHANGELOG.md.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mc: ["26.1.2", "26.2", "26.3"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Build for Minecraft ${{ matrix.mc }}
+        run: |
+          chmod +x gradlew
+          ./gradlew build -Pmc=${{ matrix.mc }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jar-${{ matrix.mc }}
+          path: build/libs/*.jar
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: jar-*
+          merge-multiple: true
+          path: jars
+
+      - name: Check the tag matches mod_version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          mod="$(grep '^mod_version=' gradle.properties | cut -d= -f2)"
+          if [ "$tag" != "$mod" ]; then
+            echo "Tag v$tag does not match mod_version=$mod in gradle.properties" >&2
+            exit 1
+          fi
+
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          # Plain string checks, no regex: prints the body of the "## [<version>]" section.
+          awk -v head="## [$version]" '
+            index($0, head) == 1 { found = 1; next }
+            found && index($0, "## [") == 1 { exit }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          {
+            echo
+            echo "Download the jar matching your Minecraft version. Requires [Fabric API](https://modrinth.com/mod/fabric-api); [Mod Menu](https://modrinth.com/mod/modmenu) is optional."
+            echo "Also on [Modrinth](https://modrinth.com/mod/rat-cheese-helper)."
+          } >> notes.md
+          cat notes.md
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Rat Cheese Helper ${{ github.ref_name }}
+          body_path: notes.md
+          files: jars/*.jar
