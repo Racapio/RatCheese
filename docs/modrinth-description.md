@@ -2,6 +2,8 @@
 
 A client-side Fabric mod for the **Rat pet** on Hypixel Skyblock.
 
+**Supports Minecraft 26.1.2, 26.2 and 26.3** — download the file whose name ends with your version (e.g. `ratcheese-1.1.1+26.3.jar`).
+
 The Rat is the only morph pet in the game: you turn into a rat, sniff out cheese that spawns nearby, and collecting it grants a random player Magic Find — while you get a chance to copy their drops (RAT BLESSING). The cheese only exists for ~10 seconds, and vanilla gives you nothing but a chat message. This mod fixes that.
 
 ## Features
@@ -29,7 +31,9 @@ The Rat is the only morph pet in the game: you turn into a rat, sniff out cheese
 `/ratcheese` — settings (also available via Mod Menu) · `/ratcheese hud` — move/scale the HUD · `/ratcheese achievements` — achievement list · `/ratcheese test` — preview the HUD with sample data · `/ratcheese scan` — debug nearby prop entities
 
 ## Notes
-- Requires **Fabric API**. Optional: Mod Menu.
+- Requires **Fabric API**. Optional: [Mod Menu](https://modrinth.com/mod/modmenu).
+- Found a bug or have an idea? [Open an issue on GitHub](https://github.com/Racapio/RatCheese/issues).
+- If the mod's menus show raw keys like `ratcheese.config.title`, another mod in your pack ships a broken language file — check your game log for `Unable to load languages`.
 - Client-side only, parses only your own chat messages, automates nothing, and does not render anything through opaque blocks.
 - Use at your own risk, like any Hypixel mod. Not affiliated with Hypixel.
 
@@ -37,4 +41,4 @@ The Rat is the only morph pet in the game: you turn into a rat, sniff out cheese
 
 ## Русский
 
-Клиентский мод для пета **Крыса** (Rat) на Hypixel Skyblock: подсветка (в прямой видимости) и увеличение сыра (живёт всего ~10 секунд!), HUD с баффами Magic Find и таймерами, счётчик крысиного лута, алерты о сыре и 24 ачивки с секретками. Настройки — `/ratcheese` или через Mod Menu, русская локализация в комплекте.
+Клиентский мод для пета **Крыса** (Rat) на Hypixel Skyblock для Minecraft **26.1.2, 26.2 и 26.3**: подсветка (в прямой видимости) и увеличение сыра (живёт всего ~10 секунд!), HUD с баффами Magic Find и таймерами, счётчик крысиного лута, алерты о сыре и 24 ачивки с секретками. Настройки — `/ratcheese` или через Mod Menu, русская локализация в комплекте. Баги и идеи — в [GitHub Issues](https://github.com/Racapio/RatCheese/issues).
