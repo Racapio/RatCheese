@@ -6,6 +6,8 @@
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
+**Скачать:** [Modrinth](https://modrinth.com/mod/rat-cheese-helper) · **Баги и идеи:** [Issues](https://github.com/Racapio/RatCheese/issues)
+
 ## Что делает
 
 1. **Подсветка сыра.** Сыр, который спавнит крыса, живёт всего ~10 секунд. Пока сыр в прямой видимости, мод подсвечивает его свечением (цвет настраивается) и **увеличивает до 5x**, чтобы успеть добежать. Сквозь непрозрачные блоки ничего не показывается.

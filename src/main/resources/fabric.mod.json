@@ -3,12 +3,14 @@
 	"id": "ratcheese",
 	"version": "${version}",
 	"name": "Rat Cheese Helper",
-	"description": "Highlights and enlarges the cheese spawned by the Rat pet on Hypixel Skyblock, and shows a HUD with active Rat's Blessing buffs (Magic Find) and loot shares.",
+	"description": "Highlights and enlarges the cheese spawned by the Rat pet on Hypixel Skyblock, shows a HUD with active Rat's Blessing buffs (Magic Find) and rat loot, and adds cheese-themed achievements.",
 	"authors": [
 		"Racapio"
 	],
 	"contact": {
-		"sources": "https://github.com/Racapio/RatCheese"
+		"homepage": "https://modrinth.com/mod/rat-cheese-helper",
+		"sources": "https://github.com/Racapio/RatCheese",
+		"issues": "https://github.com/Racapio/RatCheese/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/ratcheese/icon.png",

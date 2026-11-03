@@ -6,6 +6,8 @@ A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2, 26.2, 26.3**)
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
+**Download:** [Modrinth](https://modrinth.com/mod/rat-cheese-helper) · **Bugs & ideas:** [Issues](https://github.com/Racapio/RatCheese/issues)
+
 ## Features
 
 1. **Cheese highlight.** The cheese your rat spawns only lives for ~10 seconds. While it's in your line of sight, the mod gives it a glowing outline (configurable color) and renders it **up to 5× bigger** so you can reach it in time. Nothing is revealed through opaque blocks.

@@ -4,6 +4,12 @@ All notable changes to **Rat Cheese Helper** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-11-05
+
+### Added
+- Mod Menu "Website" and "Issues" buttons now work: they link to the Modrinth
+  page and the GitHub issue tracker.
+
 ## [1.1.0] - 2026-11-05
 
 ### Added
