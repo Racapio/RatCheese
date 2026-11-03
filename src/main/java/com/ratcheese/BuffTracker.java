@@ -1,7 +1,9 @@
 package com.ratcheese;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.achievements.AchievementManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLevelEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.ChatFormatting;
@@ -45,6 +47,8 @@ public class BuffTracker {
 	private static final Pattern INCOMING_GENERIC = Pattern.compile("^(?:CHEESE|RAT BLESSING)! (?!You buffed).*?" + MF + "!?$");
 	private static final Pattern GENERIC_NAME = Pattern.compile(NAME + " (?:buffed|blessed|granted|gave)");
 	/** Action varies: "killed a mob", "mined a block", possibly more — match and capture any. */
+	/** Anchored: Hypixel delivers player chat as game messages too, so "you smell cheese" typed by someone must not count. */
+	private static final Pattern SMELL = Pattern.compile("^CHEESE! You smell Cheese nearby!?$", Pattern.CASE_INSENSITIVE);
 	private static final Pattern LOOT = Pattern.compile("^RAT BLESSING! You collected some loot after " + NAME + " (.+?)!?$");
 
 	private static final int DEFAULT_NAME_COLOR = 0xFFFFFF;
@@ -86,6 +90,9 @@ public class BuffTracker {
 			return true;
 		});
 		ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> reset());
+		// Hypixel lobby / island switches happen inside the proxy and may not fire JOIN,
+		// but they always swap the client level — reset per-lobby state there too.
+		ClientLevelEvents.AFTER_CLIENT_LEVEL_CHANGE.register((client, level) -> onLobbyChange());
 		// Smelled cheese but never collected it → secret achievement.
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (smellUntil != 0 && System.currentTimeMillis() > smellUntil) {
@@ -129,8 +136,7 @@ public class BuffTracker {
 			return;
 		}
 
-		String lower = text.toLowerCase();
-		if (lower.contains("you smell") && lower.contains("cheese")) {
+		if (SMELL.matcher(text).matches()) {
 			onSmell();
 			smellFromTest = false;
 			return;
@@ -173,7 +179,7 @@ public class BuffTracker {
 		RatCheeseConfig config = RatCheeseConfig.get();
 		Minecraft client = Minecraft.getInstance();
 		if (config.smellAlertTitle) {
-			client.gui.setTitle(Component.translatable("ratcheese.smell.title").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
+			Mc.showTitle(Component.translatable("ratcheese.smell.title").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD), null);
 		}
 		if (config.smellAlertSound) {
 			client.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING.value(), 1.5f, 1.0f));
@@ -229,6 +235,17 @@ public class BuffTracker {
 		smellFromTest = false;
 		lastLootFrom = null;
 		lastLootAt = 0;
+		AchievementManager.onLobbyJoin();
+	}
+
+	/**
+	 * Lighter reset for warps: buffs keep counting down on their own timers,
+	 * but a pending smell and the per-lobby achievement streaks do not carry over.
+	 */
+	private static void onLobbyChange() {
+		smellUntil = 0;
+		lastSmellAt = 0;
+		smellFromTest = false;
 		AchievementManager.onLobbyJoin();
 	}
 

@@ -36,15 +36,18 @@ public enum Achievement {
 	COMPLETIONIST("completionist", Rarity.LEGENDARY, 0, Stat.COMPLETIONIST, false);
 
 	public enum Rarity {
-		COMMON(ChatFormatting.WHITE),
-		RARE(ChatFormatting.BLUE),
-		EPIC(ChatFormatting.LIGHT_PURPLE),
-		LEGENDARY(ChatFormatting.GOLD);
+		COMMON(ChatFormatting.WHITE, 0xFFFFFF),
+		RARE(ChatFormatting.BLUE, 0x5555FF),
+		EPIC(ChatFormatting.LIGHT_PURPLE, 0xFF55FF),
+		LEGENDARY(ChatFormatting.GOLD, 0xFFAA00);
 
 		public final ChatFormatting color;
+		/** Explicit RGB: ChatFormatting no longer exposes its color since 26.2. */
+		public final int rgb;
 
-		Rarity(ChatFormatting color) {
+		Rarity(ChatFormatting color, int rgb) {
 			this.color = color;
+			this.rgb = rgb;
 		}
 	}
 

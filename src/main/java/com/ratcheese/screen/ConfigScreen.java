@@ -1,5 +1,6 @@
 package com.ratcheese.screen;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.RatCheeseConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -85,9 +86,9 @@ public class ConfigScreen extends Screen {
 
 		// Row 7: edit hud position | achievements
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.editHud"),
-				button -> minecraft.setScreen(new HudPositionScreen(this))).bounds(leftX, y, columnWidth, 20).build());
+				button -> Mc.setScreen(new HudPositionScreen(this))).bounds(leftX, y, columnWidth, 20).build());
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.achievements"),
-				button -> minecraft.setScreen(new AchievementsScreen(this))).bounds(rightX, y, columnWidth, 20).build());
+				button -> Mc.setScreen(new AchievementsScreen(this))).bounds(rightX, y, columnWidth, 20).build());
 		y += 28;
 
 		addRenderableWidget(Button.builder(Component.translatable("ratcheese.config.done"),
@@ -169,6 +170,6 @@ public class ConfigScreen extends Screen {
 	@Override
 	public void onClose() {
 		RatCheeseConfig.save();
-		minecraft.setScreen(parent);
+		Mc.setScreen(parent);
 	}
 }

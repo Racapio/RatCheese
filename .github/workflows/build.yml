@@ -5,6 +5,10 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mc: ["26.1.2", "26.2", "26.3"]
     steps:
       - uses: actions/checkout@v4
 
@@ -14,13 +18,13 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - name: Build
+      - name: Build for Minecraft ${{ matrix.mc }}
         run: |
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew build -Pmc=${{ matrix.mc }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ratcheese
+          name: ratcheese-${{ matrix.mc }}
           path: build/libs/*.jar

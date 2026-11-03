@@ -2,7 +2,7 @@
 
 [English](README.md) · **Русский**
 
-Клиентский Fabric-мод для Hypixel Skyblock (Minecraft **26.1.2**) под механику пета **Rat** (Крыса).
+Клиентский Fabric-мод для Hypixel Skyblock (Minecraft **26.1.2, 26.2, 26.3**) под механику пета **Rat** (Крыса).
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
@@ -19,10 +19,10 @@
 
 ## Установка
 
-1. [Fabric Loader](https://fabricmc.net/use/installer/) для Minecraft 26.1.2 (loader ≥ 0.19.3).
+1. [Fabric Loader](https://fabricmc.net/use/installer/) для своей версии Minecraft (26.1.2, 26.2 или 26.3).
 2. В `mods`:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) для 26.1.2;
-   - `ratcheese-<версия>.jar` (см. [Releases](https://github.com/Racapio/RatCheese/releases) или собери сам);
+   - [Fabric API](https://modrinth.com/mod/fabric-api) под ту же версию;
+   - `ratcheese-<версия>+<mc>.jar` под твою версию Minecraft (см. [Releases](https://github.com/Racapio/RatCheese/releases) или собери сам);
    - опционально [Mod Menu](https://modrinth.com/mod/modmenu) — настройки прямо из списка модов.
 
 ## Команды
@@ -45,13 +45,19 @@
 
 ## Сборка из исходников
 
-Нужен JDK 25:
+Нужен JDK 25. Сборка под одну версию (по умолчанию 26.1.2):
 
 ```
-gradlew build
+gradlew build -Pmc=26.3
 ```
 
-Jar появится в `build/libs/`.
+или сразу под все версии:
+
+```
+powershell -ExecutionPolicy Bypass -File buildAll.ps1
+```
+
+Jar'ы появятся в `build/libs/`. Зависимости по версиям — `versions/<mc>.properties`, версионный код — `src/compat/`.
 
 ## Дисклеймер
 

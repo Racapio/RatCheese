@@ -1,5 +1,6 @@
 package com.ratcheese.screen;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.RatCheeseConfig;
 import com.ratcheese.hud.CheeseHud;
 import net.minecraft.ChatFormatting;
@@ -11,7 +12,6 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.CommonColors;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 
@@ -132,14 +132,15 @@ public class HudPositionScreen extends Screen {
 
 	@Override
 	public boolean keyPressed(KeyEvent input) {
+		// isLeft()/isRight()/... instead of raw key codes: 26.3 switched from GLFW to
+		// SDL key codes, these helpers stay correct on every version.
 		RatCheeseConfig config = RatCheeseConfig.get();
-		switch (input.key()) {
-			case GLFW.GLFW_KEY_LEFT -> { moveTo(config.hudX - 1, config.hudY); return true; }
-			case GLFW.GLFW_KEY_RIGHT -> { moveTo(config.hudX + 1, config.hudY); return true; }
-			case GLFW.GLFW_KEY_UP -> { moveTo(config.hudX, config.hudY - 1); return true; }
-			case GLFW.GLFW_KEY_DOWN -> { moveTo(config.hudX, config.hudY + 1); return true; }
-			default -> { return super.keyPressed(input); }
-		}
+		if (input.isLeft()) moveTo(config.hudX - 1, config.hudY);
+		else if (input.isRight()) moveTo(config.hudX + 1, config.hudY);
+		else if (input.isUp()) moveTo(config.hudX, config.hudY - 1);
+		else if (input.isDown()) moveTo(config.hudX, config.hudY + 1);
+		else return super.keyPressed(input);
+		return true;
 	}
 
 	private void moveTo(int x, int y) {
@@ -151,6 +152,6 @@ public class HudPositionScreen extends Screen {
 	@Override
 	public void onClose() {
 		RatCheeseConfig.save();
-		minecraft.setScreen(parent);
+		Mc.setScreen(parent);
 	}
 }

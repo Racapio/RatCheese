@@ -4,6 +4,26 @@ All notable changes to **Rat Cheese Helper** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-11-05
+
+### Added
+- Support for Minecraft **26.2** and **26.3** alongside 26.1.2 — one jar per
+  version (`ratcheese-1.1.0+<mc>.jar`). Version-specific client calls live in a
+  small `compat/Mc` bridge; 26.3's switch from GLFW to SDL key codes is handled
+  by using the built-in arrow-key helpers in the HUD editor.
+
+### Fixed
+- The "smell cheese" alert could be triggered by anyone typing "you smell …
+  cheese" in chat (Hypixel delivers player chat as game messages), which also
+  falsely counted towards the "Cheese Fumbled" / "Runny Nose" achievements. The
+  message is now matched exactly.
+- Per-lobby achievement streaks ("Cheese Fever", "Favorite", "Runny Nose") now
+  reset on every lobby/island switch, not only on a fresh server connection.
+  Active buffs keep counting down across warps.
+
+### Changed
+- Build toolchain: Fabric Loom 1.19, Gradle 9.8.2, Fabric Loader 0.20.1.
+
 ## [1.0.2] - 2026-07-24
 
 ### Changed

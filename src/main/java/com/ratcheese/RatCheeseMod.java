@@ -1,5 +1,6 @@
 package com.ratcheese;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.hud.CheeseHud;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -37,7 +38,7 @@ public class RatCheeseMod implements ClientModInitializer {
 			if (pendingScreen != null) {
 				Screen screen = pendingScreen;
 				pendingScreen = null;
-				client.setScreen(screen);
+				Mc.setScreen(screen);
 			}
 		});
 	}

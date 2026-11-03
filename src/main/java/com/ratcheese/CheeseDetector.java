@@ -1,5 +1,6 @@
 package com.ratcheese;
 
+import com.ratcheese.compat.Mc;
 import com.mojang.authlib.properties.Property;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -65,10 +66,10 @@ public class CheeseDetector {
 		}
 	}
 
-	/** True if the camera has an unobstructed view of the entity (glass etc. does not block). */
+	/** True if any block-free ray from the camera reaches the entity (center or top). */
 	private static boolean isVisible(Minecraft client, Entity entity) {
 		if (client.player == null || client.level == null) return false;
-		Vec3 from = client.gameRenderer.getMainCamera().position();
+		Vec3 from = Mc.cameraPosition();
 		AABB box = entity.getBoundingBox();
 		Vec3 center = box.getCenter();
 		Vec3[] targets = {center, new Vec3(center.x, box.maxY, center.z)};

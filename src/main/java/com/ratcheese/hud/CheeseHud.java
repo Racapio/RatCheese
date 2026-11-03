@@ -1,5 +1,6 @@
 package com.ratcheese.hud;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.BuffTracker;
 import com.ratcheese.RatCheeseConfig;
 import com.ratcheese.RatCheeseMod;
@@ -45,9 +46,9 @@ public class CheeseHud {
 	private static void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
 		Minecraft client = Minecraft.getInstance();
 		RatCheeseConfig config = RatCheeseConfig.get();
-		if (!config.hudEnabled || client.player == null || client.options.hideGui) return;
+		if (!config.hudEnabled || client.player == null || Mc.hudHidden()) return;
 		// The position screen draws its own preview.
-		if (client.screen instanceof HudPositionScreen) return;
+		if (Mc.screen() instanceof HudPositionScreen) return;
 
 		List<Row> rows = buildRows(false);
 		if (rows.isEmpty()) return;

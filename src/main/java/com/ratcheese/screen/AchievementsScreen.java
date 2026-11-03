@@ -1,5 +1,6 @@
 package com.ratcheese.screen;
 
+import com.ratcheese.compat.Mc;
 import com.ratcheese.achievements.Achievement;
 import com.ratcheese.achievements.AchievementManager;
 import net.minecraft.ChatFormatting;
@@ -89,8 +90,7 @@ public class AchievementsScreen extends Screen {
 		boolean unlocked = AchievementManager.isUnlocked(achievement);
 		boolean hidden = achievement.secret && !unlocked;
 
-		Integer rarityRgb = achievement.rarity.color.getColor();
-		int rarityColor = 0xFF000000 | (rarityRgb == null ? 0xFFFFFF : rarityRgb);
+		int rarityColor = 0xFF000000 | achievement.rarity.rgb;
 
 		// Card background + border (rarity-colored when unlocked)
 		int background = unlocked ? 0xC0182814 : 0xC0141414;
@@ -161,6 +161,6 @@ public class AchievementsScreen extends Screen {
 
 	@Override
 	public void onClose() {
-		minecraft.setScreen(parent);
+		Mc.setScreen(parent);
 	}
 }

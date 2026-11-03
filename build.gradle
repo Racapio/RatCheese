@@ -2,7 +2,16 @@ plugins {
 	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 }
 
-version = project.mod_version
+// Load the per-Minecraft-version dependency set (versions/<mc>.properties).
+def mcTarget = project.property('mc')
+def versionFile = file("versions/${mcTarget}.properties")
+if (!versionFile.exists()) {
+	throw new GradleException("Unsupported Minecraft target '${mcTarget}': missing ${versionFile}")
+}
+def target = new Properties()
+versionFile.withInputStream { target.load(it) }
+
+version = "${project.mod_version}+${target.minecraft_version}"
 group = project.maven_group
 
 repositories {
@@ -16,6 +25,9 @@ repositories {
 	}
 }
 
+// Version-specific bridge code (see src/compat/*/java/com/ratcheese/compat/Mc.java).
+sourceSets.main.java.srcDir("src/compat/${target.compat}/java")
+
 loom {
 	mods {
 		"ratcheese" {
@@ -25,21 +37,21 @@ loom {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	minecraft "com.mojang:minecraft:${target.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${target.fabric_api_version}"
 
 	// Mod Menu integration (config screen entry)
-	implementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+	implementation "com.terraformersmc:modmenu:${target.mod_menu_version}"
 }
 
 processResources {
-	def version = project.version
-	inputs.property "version", version
+	def props = [version: project.mod_version, minecraft: target.minecraft_dependency]
+	inputs.properties props
 
 	filesMatching("fabric.mod.json") {
-		expand "version": version
+		expand props
 	}
 }
 

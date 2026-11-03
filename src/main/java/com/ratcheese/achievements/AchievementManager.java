@@ -1,5 +1,6 @@
 package com.ratcheese.achievements;
 
+import com.ratcheese.compat.Mc;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
@@ -200,9 +201,8 @@ public class AchievementManager {
 		Minecraft client = Minecraft.getInstance();
 		if (client.player == null) return;
 
-		client.gui.resetTitleTimes();
-		client.gui.setSubtitle(Component.translatable("ratcheese.achievement.unlocked").withStyle(ChatFormatting.GREEN));
-		client.gui.setTitle(achievement.title());
+		Mc.showTitle(achievement.title(),
+				Component.translatable("ratcheese.achievement.unlocked").withStyle(ChatFormatting.GREEN));
 
 		boolean big = achievement.rarity == Achievement.Rarity.LEGENDARY;
 		client.getSoundManager().play(SimpleSoundInstance.forUI(

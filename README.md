@@ -2,7 +2,7 @@
 
 **English** · [Русский](README.ru.md)
 
-A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2**) built around the **Rat pet** mechanic.
+A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2, 26.2, 26.3**) built around the **Rat pet** mechanic.
 
 ![Build](https://github.com/Racapio/RatCheese/actions/workflows/build.yml/badge.svg)
 
@@ -19,10 +19,10 @@ A client-side Fabric mod for Hypixel Skyblock (Minecraft **26.1.2**) built aroun
 
 ## Installation
 
-1. [Fabric Loader](https://fabricmc.net/use/installer/) for Minecraft 26.1.2 (loader ≥ 0.19.3).
+1. [Fabric Loader](https://fabricmc.net/use/installer/) for your Minecraft version (26.1.2, 26.2 or 26.3).
 2. Into `mods`:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) for 26.1.2;
-   - `ratcheese-<version>.jar` (see [Releases](https://github.com/Racapio/RatCheese/releases) or build it yourself);
+   - [Fabric API](https://modrinth.com/mod/fabric-api) for the same version;
+   - `ratcheese-<version>+<mc>.jar` matching your Minecraft version (see [Releases](https://github.com/Racapio/RatCheese/releases) or build it yourself);
    - optionally [Mod Menu](https://modrinth.com/mod/modmenu) — settings right from the mod list.
 
 ## Commands
@@ -45,13 +45,19 @@ The texture hash of Hypixel's cheese head is built into the mod — the highligh
 
 ## Building from source
 
-Requires JDK 25:
+Requires JDK 25. Build for one version (default 26.1.2):
 
 ```
-gradlew build
+gradlew build -Pmc=26.3
 ```
 
-The jar ends up in `build/libs/`.
+or all supported versions at once:
+
+```
+powershell -ExecutionPolicy Bypass -File buildAll.ps1
+```
+
+Jars end up in `build/libs/`. Per-version dependencies live in `versions/<mc>.properties`; version-specific code lives in `src/compat/`.
 
 ## Disclaimer
 
